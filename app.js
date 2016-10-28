@@ -25,8 +25,8 @@ io.on('connection', function (socket) {
     var city = cityLookup.get(data.ip);
     if (city !== null && city.location !== undefined) {
       data = {
-        x: city.location.longitude,
-        y: city.location.latitude
+        lng: city.location.longitude,
+        lat: city.location.latitude
       }
       socket.broadcast.emit('hit', data);
       console.log(data);
