@@ -15,13 +15,18 @@
   });
 
   var elem = document.getElementById('button');
-  elem.onclick = function() {
+  elem.onclick = hit;
+
+  function hit () {
   	var ip = Math.floor((Math.random() * 255) + 1)
+  	+ "." + Math.floor((Math.random() * 255) + 1)
+  	+ "." + Math.floor((Math.random() * 255) + 1)
   	+ "." + Math.floor((Math.random() * 255) + 1);
-  	+ "." + Math.floor((Math.random() * 255) + 1);
-  	+ "." + Math.floor((Math.random() * 255) + 1);
+  	console.log(ip);
   	socket.emit('event', { type: 'hit', ip:ip });
   };
+
+  setInterval(hit, 1000);
 
   function drawCircle (x,y) {
   	  var canvas = document.getElementById('myCanvas');
