@@ -1,0 +1,43 @@
+<html>
+<body>
+<input type="button" value="send" id="button" />
+
+<canvas id="myCanvas" width="360" height="360"></canvas>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io('http://localhost:8080');
+
+  socket.on('hit', function (data) {
+    console.log(data);
+    //socket.emit('Hit', { my: 'data' });
+    drawCircle(data.x+180,data.y+180);
+  });
+
+  var elem = document.getElementById('button');
+  elem.onclick = function() {
+  	var ip = Math.floor((Math.random() * 255) + 1)
+  	+ "." + Math.floor((Math.random() * 255) + 1);
+  	+ "." + Math.floor((Math.random() * 255) + 1);
+  	+ "." + Math.floor((Math.random() * 255) + 1);
+  	socket.emit('event', { type: 'hit', ip:ip });
+  };
+
+  function drawCircle (x,y) {
+  	  var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      var centerX = canvas.width / 2;
+      var centerY = canvas.height / 2;
+      var radius = 10;
+
+      context.beginPath();
+      context.arc(x, y, radius, 0, 2 * Math.PI, false);
+      context.fillStyle = 'green';
+      context.fill();
+      context.lineWidth = 1;
+      context.strokeStyle = '#003300';
+      context.stroke();
+  }
+</script>
+</body>
+</html>
