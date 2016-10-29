@@ -27,10 +27,15 @@ window.initMap = () => {
         var marker = new google.maps.Marker({
             position: data,
             map: map,
-            title: 'Hello World!',
+            //title: 'Hello World!',
             icon: getCircle(5),
             optimized: false
         });
+
+        // Remove marker after a while
+        setTimeout(() => {
+            marker.setMap(null);
+        }, 5000)
     });
 
     function hit () {
@@ -49,13 +54,15 @@ window.initMap = () => {
 function getCircle(magnitude) {
     return {
         //path: google.maps.SymbolPath.CIRCLE,
-        //fillColor: 'red',
-        //fillOpacity: .2,
+        //path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
+        fillColor: 'red',
+        fillOpacity: .2,
         //scale: Math.pow(2, magnitude) / 2,
-        //strokeColor: 'white',
-        //strokeWeight: .5,
+        strokeColor: 'white',
+        strokeWeight: .5,
         size: new google.maps.Size(100, 60),
         scaledSize: new google.maps.Size(70, 60),
-        url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/cheshire1-icon.png'
+        //url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/cheshire1-icon.png'
+        url: 'images/icon.svg'
     };
 }
