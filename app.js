@@ -28,7 +28,7 @@ io.on('connection', function (socket) {
         lng: city.location.longitude,
         lat: city.location.latitude
       }
-      socket.broadcast.emit('hit', data);
+      io.sockets.emit('hit', data);
       console.log(data);
     } else {
       console.log("lookup failed for " + data.ip)

@@ -13,6 +13,13 @@ window.initMap = () => {
         mapTypeId: 'roadmap'
     });
 
+    var myoverlay = new google.maps.OverlayView();
+    myoverlay.draw = function () {
+        console.log('draw');
+        this.getPanes().markerLayer.id='markerLayer';
+    };
+    myoverlay.setMap(map);
+
     var socket = io('http://localhost:8080');
 
     socket.on('hit', function (data) {
@@ -21,15 +28,9 @@ window.initMap = () => {
             position: data,
             map: map,
             title: 'Hello World!',
-            icon: getCircle(5)
+            icon: getCircle(5),
+            optimized: false
         });
-    });
-
-    var marker = new google.maps.Marker({
-        position: {lat: -25.363, lng: 131.044},
-        map: map,
-        title: 'Hello World!',
-        icon: getCircle(5)
     });
 
     function hit () {
@@ -47,11 +48,14 @@ window.initMap = () => {
 
 function getCircle(magnitude) {
     return {
-        path: google.maps.SymbolPath.CIRCLE,
-        fillColor: 'red',
-        fillOpacity: .2,
-        scale: Math.pow(2, magnitude) / 2,
-        strokeColor: 'white',
-        strokeWeight: .5
+        //path: google.maps.SymbolPath.CIRCLE,
+        //fillColor: 'red',
+        //fillOpacity: .2,
+        //scale: Math.pow(2, magnitude) / 2,
+        //strokeColor: 'white',
+        //strokeWeight: .5,
+        size: new google.maps.Size(100, 60),
+        scaledSize: new google.maps.Size(70, 60),
+        url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/cheshire1-icon.png'
     };
 }
