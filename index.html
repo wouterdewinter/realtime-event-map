@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Realtime traffic map</title>
-  <style>
-    /* Always set the map height explicitly to define the size of the div
+<!DOCTYPE html><html><head><title>Realtime traffic map</title><style>/* Always set the map height explicitly to define the size of the div
      * element that contains the map. */
     #map {
       height: 100%;
@@ -16,12 +11,14 @@
     }
 
     #markerLayer img {
-      animation: grow 5s 1 normal;
-      -webkit-animation: grow 5s 1 normal;
+      animation: grow 3s 1 normal;
+      -webkit-animation: grow 3s 1 normal;
       transform-origin: center;
       -webkit-transform-origin: center;
       animation-fill-mode: both;
       -webkit-animation-fill-mode: both;
+      animation-timing-function: linear;
+      -webkit-animation-timing-function: linear;
     }
 
     /* Animaitons */
@@ -50,18 +47,4 @@
         /*transform: scale(1);*/
         /*-webkit-transform: scale(1);*/
       /*}*/
-    /*}*/
-
-
-  </style>
-
-</head>
-<body>
-  <div id="map"></div>
-  <script src="javascripts/app.js"></script>
-
-  <script async defer
-          src='https://maps.googleapis.com/maps/api/js?key={{ google_maps_api_key }}&callback=initMap'>
-  </script>
-</body>
-</html>
+    /*}*/</style></head><body><div id="map"></div><script src="javascripts/app-d3209008dc351e04ac8e.js"></script><script async defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa_00PJl5P4l8hP59HMc9nRtZKjuuF6rs&callback=initMap"></script></body></html>
