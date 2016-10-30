@@ -50,9 +50,9 @@ const emitEvent = (ip) => {
       lat: city.location.latitude
     };
     io.sockets.emit('hit', data);
-    console.log('Emitting event ', {data, ip});
+    console.log('emitting event ', {data, ip});
   } else {
-    console.log("Lookup failed for " + ip)
+    console.log("lookup failed for " + ip)
   }
 };
 
