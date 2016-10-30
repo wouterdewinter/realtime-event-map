@@ -47,7 +47,7 @@ window.initMap = () => {
         socket.emit('event', { type: 'hit', ip:ip });
     };
 
-    setInterval(hit, 1000);
+    //setInterval(hit, 100);
 
 }
 

@@ -80,6 +80,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "httpdispatcher": "^1.0.0",
     "normalize.css": "^4.0.0",
     "socket.io": "^1.5.1"
   }
