@@ -1,28 +1,18 @@
-var app = require('http').createServer(handler)
-var io = require('socket.io')(app);
+var express = require('express');
+var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
 var fs = require('fs');
 var maxmind = require('maxmind');
-var dispatcher = require('httpdispatcher');
 
 var cityLookup = maxmind.openSync(__dirname + '/data/GeoLite2-City.mmdb');
 
-app.listen(8080);
+app.use(express.static('public'));
 
-function handler (request, response) {
-  try {
-    console.log(request.url);
-    dispatcher.dispatch(request, response);
-  } catch(err) {
-    console.log(err);
-  }
-}
-
-// Set path to serve static resources
-dispatcher.setStatic('static');
-dispatcher.setStaticDirname('/public');
+server.listen(8080);
 
 // A sample GET request
-dispatcher.onPost("/hit", function(req, res) {
+app.get('/hit', function (req, res) {
   let ip = req.connection.remoteAddress;
   console.log('Http ip is '+ip);
   emitEvent(ip);
