@@ -6,9 +6,10 @@
 
   "tasks": {
     "browserSync": {
-      "server": {
-        "baseDir": "public"
-      }
+        "proxy": {
+          "target": "http://localhost:8080",
+          "ws": true
+        }
     },
 
     "static": {

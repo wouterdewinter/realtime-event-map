@@ -20,7 +20,7 @@ window.initMap = () => {
     };
     myoverlay.setMap(map);
 
-    var socket = io('http://localhost:8080');
+    var socket = io();
 
     socket.on('hit', function (data) {
         console.log(data);
@@ -53,16 +53,8 @@ window.initMap = () => {
 
 function getCircle(magnitude) {
     return {
-        //path: google.maps.SymbolPath.CIRCLE,
-        //path: "M-20,0a20,20 0 1,0 40,0a20,20 0 1,0 -40,0",
-        fillColor: 'red',
-        fillOpacity: .2,
-        //scale: Math.pow(2, magnitude) / 2,
-        strokeColor: 'white',
-        strokeWeight: .5,
         size: new google.maps.Size(100, 60),
         scaledSize: new google.maps.Size(70, 60),
-        //url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/123941/cheshire1-icon.png'
         url: 'images/icon.svg'
     };
 }
