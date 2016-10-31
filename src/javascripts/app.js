@@ -47,8 +47,21 @@ window.initMap = () => {
         socket.emit('event', { type: 'hit', ip:ip });
     };
 
+    map.addListener('center_changed', () => updateMap(map));
+    map.addListener('zoom_changed', () => updateMap(map));
+
     //setInterval(hit, 100);
 
+}
+
+function updateMap (map) {
+    let data = {
+        zoom: map.getZoom(),
+        lat: map.getCenter().lat(),
+        lng: map.getCenter().lng()
+    };
+    console.log(data);
+    window.location.hash = JSON.stringify(data);
 }
 
 function getCircle(magnitude) {
