@@ -15,7 +15,8 @@ server.listen(8080);
 app.get('/hit', function (req, res) {
   let ip = req.connection.remoteAddress;
   console.log('Http ip is '+ip);
-  emitEvent(ip);
+  //emitEvent(data.ip);
+  emitEvent(randomIp(), req.query.id);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.end('Ok');
@@ -26,11 +27,17 @@ io.on('connection', function (socket) {
     var ip = socket.request.connection.remoteAddress;
     console.log('Socket IP is '+ip);
     // emit ip from data now
-    emitEvent(data.ip);
+    //emitEvent(data.ip);
+    emitEvent(randomIp());
+  });
+
+  socket.on('join', function (data) {
+    console.log('Joining id ' + data.id);
+    socket.join(data.id);
   });
 });
 
-const emitEvent = (ip) => {
+const emitEvent = (ip, id) => {
   console.time("lookup");
   var city = cityLookup.get(ip);
   console.timeEnd("lookup");
@@ -39,7 +46,7 @@ const emitEvent = (ip) => {
       lng: city.location.longitude,
       lat: city.location.latitude
     };
-    io.sockets.emit('hit', data);
+    io.to(id).emit('hit', data);
     console.log('emitting event ', {data, ip});
   } else {
     console.log("lookup failed for " + ip)
@@ -55,5 +62,5 @@ const randomIp = () => {
 
 // Simulate events
 setInterval(() => {
-  emitEvent(randomIp())
+  emitEvent(randomIp(), 0)
 }, 1000);

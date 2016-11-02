@@ -29,7 +29,6 @@ window.initMap = () => {
         var marker = new google.maps.Marker({
             position: data,
             map: map,
-            //title: 'Hello World!',
             icon: getCircle(5),
             optimized: false
         });
@@ -40,21 +39,12 @@ window.initMap = () => {
         }, 5000)
     });
 
-    function hit () {
-        var ip = Math.floor((Math.random() * 255) + 1)
-            + "." + Math.floor((Math.random() * 255) + 1)
-            + "." + Math.floor((Math.random() * 255) + 1)
-            + "." + Math.floor((Math.random() * 255) + 1);
-        console.log(ip);
-        socket.emit('event', { type: 'hit', ip:ip });
-    };
+    socket.emit('join', { id: hash.getParam('id', 0)});
 
     map.addListener('center_changed', () => updateMap(map));
     map.addListener('zoom_changed', () => updateMap(map));
 
-    //setInterval(hit, 100);
-
-}
+};
 
 function updateMap (map) {
 
