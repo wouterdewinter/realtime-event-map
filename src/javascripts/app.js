@@ -3,13 +3,15 @@
 console.log(`app.js has loaded!`)
 
 import io from 'socket.io-client';
+import hash from 'modules/hash';
 
 var map;
 
 window.initMap = () => {
+
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 2,
-        center: {lat: 0, lng: 0},
+        zoom: Number(hash.getParam('zoom', 2)),
+        center: {lat: Number(hash.getParam('lat', 0)), lng: Number(hash.getParam('lng', 0))},
         mapTypeId: 'roadmap'
     });
 
@@ -55,13 +57,14 @@ window.initMap = () => {
 }
 
 function updateMap (map) {
+
     let data = {
         zoom: map.getZoom(),
         lat: map.getCenter().lat(),
         lng: map.getCenter().lng()
     };
     console.log(data);
-    window.location.hash = JSON.stringify(data);
+    hash.setParams(data);
 }
 
 function getCircle(magnitude) {
