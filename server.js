@@ -11,12 +11,22 @@ app.use(express.static('public'));
 
 server.listen(process.env.PORT || 8080);
 
-// A sample GET request
+// Test with random ip address
+app.get('/test', function (req, res) {
+  emitEvent(randomIp(), req.query.id);
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Ok');
+});
+
 app.get('/hit', function (req, res) {
   let ip = req.connection.remoteAddress;
+  // Translate ipv6 notation of ipv4 addresses
+  //if (ip.substr(0, 7) == "::ffff:") {
+  //  ip = ip.substr(7)
+  //}
   console.log('Http ip is '+ip);
-  //emitEvent(data.ip);
-  emitEvent(randomIp(), req.query.id);
+  emitEvent(ip, req.query.id);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.end('Ok');
