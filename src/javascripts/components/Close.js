@@ -6,7 +6,7 @@ export default class extends React.Component {
     render() {
         return (
             h('i', {
-                className: 'rtm-menu fa fa-bars',
+                className: 'rtm-close fa fa-times',
                 onClick: this.props.onClick
             })
         )
