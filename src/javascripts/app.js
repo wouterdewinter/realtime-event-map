@@ -8,7 +8,7 @@ import * as map from './modules/map/map'
 
 window.initMap = map.initMap;
 
-var mapId = hash.getParam('id', 'demo');
+var mapId = hash.getParam('mapId', 'demo');
 
 var socket = io();
 
@@ -18,7 +18,8 @@ socket.on('hit', function (data) {
 
 const onMapIdChange = (mapId) => {
     console.log('Joining ' + mapId);
-    socket.emit('join', { id: mapId});
+    socket.emit('join', {mapId});
+    hash.setParam('mapId', mapId)
 };
 
 // Join initial mapId

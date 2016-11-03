@@ -9,7 +9,7 @@ var cityLookup = maxmind.openSync(__dirname + '/data/GeoLite2-City.mmdb');
 
 app.use(express.static('public'));
 
-server.listen(8080);
+server.listen(process.env.PORT || 8080);
 
 // A sample GET request
 app.get('/hit', function (req, res) {
@@ -23,7 +23,7 @@ app.get('/hit', function (req, res) {
 });
 
 io.on('connection', function (socket) {
-  socket.on('event', function (data) {
+  socket.on('hit', function (data) {
     var ip = socket.request.connection.remoteAddress;
     console.log('Socket IP is '+ip);
     // emit ip from data now
@@ -37,12 +37,12 @@ io.on('connection', function (socket) {
       console.log('Leaving room '+key);
       socket.leave(key);
     });
-    console.log('Joining room ' + data.id);
-    socket.join(data.id);
+    console.log('Joining room ' + data.mapId);
+    socket.join(data.mapId);
   });
 });
 
-const emitEvent = (ip, id) => {
+const emitEvent = (ip, mapId) => {
   //console.time("lookup");
   var city = cityLookup.get(ip);
   //console.timeEnd("lookup");
@@ -51,7 +51,7 @@ const emitEvent = (ip, id) => {
       lng: city.location.longitude,
       lat: city.location.latitude
     };
-    io.to(id).emit('hit', data);
+    io.to(mapId).emit('hit', data);
     //console.log('emitting event ', {data, ip});
   } else {
     console.log("lookup failed for " + ip)
