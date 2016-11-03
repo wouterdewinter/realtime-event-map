@@ -72,6 +72,7 @@
     "object-assign": "4.0.1",
     "open": "0.0.5",
     "pretty-hrtime": "1.0.2",
+    "react-hyperscript": "^2.4.1",
     "require-dir": "0.3.0",
     "sinon": "1.17.3",
     "sinon-chai": "2.8.0",
@@ -83,6 +84,8 @@
   "dependencies": {
     "express": "^4.13.4",
     "normalize.css": "^4.0.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
     "socket.io": "^1.5.1"
   }
 }

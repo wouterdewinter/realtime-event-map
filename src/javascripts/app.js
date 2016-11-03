@@ -1,9 +1,10 @@
-//import './modules'
-
-console.log(`app.js has loaded!`)
-
 import io from 'socket.io-client';
 import hash from 'modules/hash';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Ui from './components/Ui.js';
+import h from 'react-hyperscript';
+import theme from './modules/map/theme-dark';
 
 var map;
 
@@ -12,8 +13,15 @@ window.initMap = () => {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: Number(hash.getParam('zoom', 2)),
         center: {lat: Number(hash.getParam('lat', 0)), lng: Number(hash.getParam('lng', 0))},
-        mapTypeId: 'roadmap'
+        mapTypeControlOptions: {
+            mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain', 'dark']
+        },
+        streetViewControl: false
     });
+
+    //Associate the styled map with the MapTypeId and set it to display.
+    map.mapTypes.set('dark', new google.maps.StyledMapType(theme, {name: 'Dark'}));
+    map.setMapTypeId('dark');
 
     var myoverlay = new google.maps.OverlayView();
     myoverlay.draw = function () {
@@ -64,3 +72,6 @@ function getCircle(magnitude) {
         url: 'images/icon.svg'
     };
 }
+
+
+ReactDOM.render(h(Ui), document.getElementById('ui'));

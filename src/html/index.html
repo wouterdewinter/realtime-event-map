@@ -54,12 +54,47 @@
       /*}*/
     /*}*/
 
+    .rtm-panel {
+      width: 600px;
+      height: 100px;
+      background-color: #fff;
+      padding: 30px;
+      font-family: sans-serif;
+
+      position: absolute;
+      top:0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      margin: auto;
+      opacity: 0.9;
+    }
+
+    .rtm-panel h1 {margin-top: 0; font-size: 120%}
+
+    .rtm-button {
+      background-color: #aaa;
+      color: #fff;
+      padding: 2px 10px;
+    }
+
+    .rtm-menu {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      color: #fff;
+    }
 
   </style>
+
+  <script src="https://use.fontawesome.com/faa958886c.js"></script>
 
 </head>
 <body>
   <div id="map"></div>
+  <div id="ui"></div>
+
   <script src="javascripts/app.js"></script>
 
   <script async defer
