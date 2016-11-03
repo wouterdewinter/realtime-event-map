@@ -32,22 +32,27 @@ io.on('connection', function (socket) {
   });
 
   socket.on('join', function (data) {
-    console.log('Joining id ' + data.id);
+    console.log('current rooms: ', socket.rooms);
+    Object.keys(socket.rooms).map((key) => {
+      console.log('Leaving room '+key);
+      socket.leave(key);
+    });
+    console.log('Joining room ' + data.id);
     socket.join(data.id);
   });
 });
 
 const emitEvent = (ip, id) => {
-  console.time("lookup");
+  //console.time("lookup");
   var city = cityLookup.get(ip);
-  console.timeEnd("lookup");
+  //console.timeEnd("lookup");
   if (city !== null && city.location !== undefined) {
     data = {
       lng: city.location.longitude,
       lat: city.location.latitude
     };
     io.to(id).emit('hit', data);
-    console.log('emitting event ', {data, ip});
+    //console.log('emitting event ', {data, ip});
   } else {
     console.log("lookup failed for " + ip)
   }
@@ -62,5 +67,5 @@ const randomIp = () => {
 
 // Simulate events
 setInterval(() => {
-  emitEvent(randomIp(), 0)
+  emitEvent(randomIp(), 'demo')
 }, 1000);
