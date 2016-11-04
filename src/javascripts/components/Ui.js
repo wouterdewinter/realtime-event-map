@@ -9,10 +9,11 @@ class Ui extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            showInfo: true,
-            mapId: props.mapId
-        };
+        this.state = props.initialState;
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        this.props.onStateChange(nextState);
     }
 
     render() {

@@ -34,8 +34,8 @@ export function addMarker (position) {
         position,
         map,
         icon: {
-            size: new google.maps.Size(100, 60),
-            scaledSize: new google.maps.Size(70, 60),
+            size: new google.maps.Size(80, 80),
+            anchor: new google.maps.Point(40, 40),
             url: 'images/icon.svg'
         },
         optimized: false
@@ -54,6 +54,5 @@ function updateMap (map) {
         lat: map.getCenter().lat(),
         lng: map.getCenter().lng()
     };
-    console.log(data);
-    hash.setParams(data);
+    hash.updateParams(data);
 }

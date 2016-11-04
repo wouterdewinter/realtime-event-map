@@ -28,7 +28,14 @@ hash.getParams = function () {
     var a = location.hash.substr(1).split('&');
     for (var i = 0; i < a.length; i++) {
         var b = a[i].split('=');
-        query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
+        // only add if we found a key and value
+        if (b.length === 2) {
+            query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
+        }
     }
     return query;
+};
+
+hash.updateParams = function (params) {
+    hash.setParams(Object.assign(hash.getParams(), params));
 };

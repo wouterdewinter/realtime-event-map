@@ -8,24 +8,33 @@ import * as map from './modules/map/map'
 
 window.initMap = map.initMap;
 
-var mapId = hash.getParam('mapId', 'demo');
-
 var socket = io();
 
 socket.on('hit', function (data) {
     map.addMarker(data);
 });
 
-const onMapIdChange = (mapId) => {
+const onMapIdChange = mapId => {
     console.log('Joining ' + mapId);
     socket.emit('join', {mapId});
-    hash.setParam('mapId', mapId)
+    hash.setParam('mapId', mapId);
+};
+
+var initialState = {
+    mapId: hash.getParam('mapId', 'demo'),
+    showInfo: hash.getParam('showInfo', 'true') === 'true'
 };
 
 // Join initial mapId
-onMapIdChange(mapId);
+onMapIdChange(initialState.mapId);
+
+const onStateChange = state => {
+    hash.updateParams(state);
+    console.log("state changed: ", state);
+};
 
 ReactDOM.render(h(Ui, {
-    mapId,
-    onMapIdChange
+    onMapIdChange,
+    onStateChange,
+    initialState
 }), document.getElementById('ui'));

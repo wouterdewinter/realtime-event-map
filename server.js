@@ -9,6 +9,11 @@ var cityLookup = maxmind.openSync(__dirname + '/data/GeoLite2-City.mmdb');
 
 app.use(express.static('public'));
 
+// Trust all ip's as proxy
+app.set('trust proxy', function (ip) {
+  return true;
+});
+
 server.listen(process.env.PORT || 8080);
 
 // Test with random ip address
@@ -20,11 +25,7 @@ app.get('/test', function (req, res) {
 });
 
 app.get('/hit', function (req, res) {
-  let ip = req.connection.remoteAddress;
-  // Translate ipv6 notation of ipv4 addresses
-  //if (ip.substr(0, 7) == "::ffff:") {
-  //  ip = ip.substr(7)
-  //}
+  let ip = req.ip;
   console.log('Http ip is '+ip);
   emitEvent(ip, req.query.id);
   res.setHeader('Access-Control-Allow-Origin', '*');
