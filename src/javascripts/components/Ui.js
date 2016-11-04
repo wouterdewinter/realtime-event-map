@@ -6,11 +6,6 @@ import Home from './Home';
 import Usage from './Usage';
 
 class Ui extends React.Component {
-
-    //componentWillUpdate(nextProps, nextState) {
-    //    this.props.onStateChange(nextState);
-    //}
-
     render() {
         let infoPanel = null;
 
@@ -35,7 +30,6 @@ class Ui extends React.Component {
     createMap() {
         let mapId = Math.random().toString(36).substring(7);
         this.props.updateMapId(mapId);
-        //this.props.onMapIdChange(mapId);
     }
 }
 

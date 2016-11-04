@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import Ui from './Ui';
+import joinMapIdThunk from '../thunks/joinMapIdThunk';
 
 const mapStateToProps = (state) => {
     return state
@@ -15,6 +16,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         updateMapId: (mapId) => {
             dispatch({type: 'UPDATE_MAP_ID', mapId});
+            dispatch(joinMapIdThunk);
         }
     }
 };
