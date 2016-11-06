@@ -79,6 +79,7 @@
   "dependencies": {
     "express": "^4.13.4",
     "maxmind": "^2.0.3",
+    "md5": "^2.2.1",
     "normalize.css": "^4.0.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",

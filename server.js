@@ -4,9 +4,10 @@ var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var fs = require('fs');
 var maxmind = require('maxmind');
-
+var config = require('./config/config.js');
 var cityLookup = maxmind.openSync(__dirname + '/data/GeoLite2-City.mmdb');
-
+var md5 = require('md5');
+var random = require('./src/javascripts/modules/random.js');
 app.use(express.static('public'));
 
 // Trust all ip's as proxy
@@ -37,19 +38,35 @@ io.on('connection', function (socket) {
   socket.on('hit', function (data) {
     var ip = socket.request.connection.remoteAddress;
     console.log('Socket IP is '+ip);
-    // emit ip from data now
-    //emitEvent(data.ip);
-    emitEvent(randomIp());
+    emitEvent(data.ip);
   });
 
   socket.on('join', function (data) {
-    console.log('current rooms: ', socket.rooms);
-    Object.keys(socket.rooms).map((key) => {
-      console.log('Leaving room '+key);
-      socket.leave(key);
-    });
-    console.log('Joining room ' + data.mapId);
-    socket.join(data.mapId);
+    // Check if key matches (always allow for demo id)
+    if (data.key === md5(config.salt + data.mapId) || data.mapId === 'demo') {
+      Object.keys(socket.rooms).map((room) => {
+        console.log('Leaving room ' + room);
+        socket.leave(room);
+      });
+      console.log('Joining room ' + data.mapId);
+      socket.join(data.mapId);
+    } else {
+      let error = 'Could not join room, key is invalid';
+      console.log(error);
+      socket.emit({error});
+    }
+  });
+
+  socket.on('new', function (data) {
+    let mapId = random(8);
+    let key = md5(config.salt + mapId);
+    console.log(mapId, key);
+
+    // Join new room immediately
+    socket.join(mapId);
+
+    // Return new key and mapId to client
+    socket.emit('map_created', {mapId, key});
   });
 });
 

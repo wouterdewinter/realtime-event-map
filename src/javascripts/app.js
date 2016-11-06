@@ -23,14 +23,15 @@ let store = createStore(
 
 // Push state changes to url hash
 store.subscribe(() => {
-    let {lng, lat, zoom, showInfo, mapId} = store.getState();
-    hash.updateParams({lng, lat, zoom, showInfo, mapId});
+    let {lng, lat, zoom, showInfo, mapId, key} = store.getState();
+    hash.updateParams({lng, lat, zoom, showInfo, mapId, key});
 });
 
 // Translate hash params to state
 const mapHashToState = () => {
     return {
         mapId: hash.getParam('mapId', 'demo'),
+        key: hash.getParam('key', 'demo'),
         showInfo: hash.getParam('showInfo', 'true') === 'true',
         zoom: Number(hash.getParam('zoom', 2)),
         lat: Number(hash.getParam('lat', 0)),
@@ -56,6 +57,11 @@ const onMapReady = (map) => {
         addMarker(map, data);
     });
 };
+
+// Called when new mapId is available
+socket.on('map_created', function (data) {
+    store.dispatch({type: 'NEW_MAP', mapId: data.mapId, key: data.key});
+});
 
 // Render the UI
 ReactDOM.render(

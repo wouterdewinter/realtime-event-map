@@ -4,3 +4,4 @@ data
 global.json
 public
 npm-debug.log
+config.js

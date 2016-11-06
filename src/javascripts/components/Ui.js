@@ -11,11 +11,13 @@ class Ui extends React.Component {
         let infoPanel = null;
 
         if (this.props.showInfo && this.props.mapId === 'demo') {
-            infoPanel = h(Home, {onClose: this.props.infoClose, onCreateMap: this.createMap.bind(this)});
+            infoPanel = h(Home, {
+                onClose: this.props.infoClose,
+                onCreateMap: this.props.newMapId
+            });
         } else if (this.props.showInfo) {
             infoPanel = h(Usage, {
                 onClose: this.props.infoClose,
-                onCreateMap: this.createMap.bind(this),
                 mapId: this.props.mapId
             });
         }
@@ -35,11 +37,6 @@ class Ui extends React.Component {
                 infoPanel
             ])
         );
-    }
-
-    createMap() {
-        let mapId = Math.random().toString(36).substring(7);
-        this.props.updateMapId(mapId);
     }
 }
 

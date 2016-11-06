@@ -21,10 +21,11 @@ export default (state = {mapUpdateNeeded: false}, action) => {
                 ...state,
                 showInfo: !state.showInfo
             };
-        case 'UPDATE_MAP_ID':
+        case 'NEW_MAP':
             return {
                 ...state,
                 mapId: action.mapId,
+                key: action.key,
                 showInfo: true // Always show info screen so user can see new code and links
             };
         case 'UPDATE_MAP_DATA':
@@ -39,7 +40,6 @@ export default (state = {mapUpdateNeeded: false}, action) => {
                 ...state,
                 mapUpdateNeeded: false
             };
-
         default:
             return state
     }
