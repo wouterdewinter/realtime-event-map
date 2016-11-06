@@ -46,5 +46,14 @@ ReactDOM.render(
     document.getElementById('ui')
 );
 
+window.onhashchange = () => {
+    console.log("hash change");
+    let state = {
+        mapId: hash.getParam('mapId', 'demo'),
+        showInfo: hash.getParam('showInfo', 'true') === 'true'
+    };
+    store.dispatch({type: 'INIT_STATE', state});
+};
+
 // Expose google maps callback as global
 window.initMap = map.initMap;

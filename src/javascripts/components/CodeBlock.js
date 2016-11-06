@@ -5,9 +5,12 @@ import text from '../text';
 export default class extends React.Component {
     render() {
         return (
-            h('pre', {
-                className: 'rtm-code'
-            }, this.props.children)
+            h('div',[
+                h('strong', this.props.title),
+                h('pre', {
+                    className: 'rtm-code'
+                }, this.props.children)
+            ])
         )
     }
 }

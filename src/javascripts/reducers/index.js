@@ -1,7 +1,10 @@
 export default (state = {}, action) => {
     switch (action.type) {
         case 'INIT_STATE':
-            return Object.assign(state, action.state);
+            return {
+                ...state,
+                ...action.state
+            };
         case 'INFO_CLOSE':
             return {
                 ...state,
