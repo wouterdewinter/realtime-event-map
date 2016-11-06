@@ -2,6 +2,7 @@ import React from 'react';
 import h from 'react-hyperscript';
 import text from '../text';
 import Menu from './Menu';
+import Map from './Map';
 import Home from './Home';
 import Usage from './Usage';
 
@@ -21,6 +22,7 @@ class Ui extends React.Component {
 
         return (
             h('div', [
+                h(Map, {mapCallback: this.props.mapCallback}),
                 h(Menu, {onClick: this.props.toggleMenu}),
                 infoPanel
             ])
