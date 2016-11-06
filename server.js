@@ -44,12 +44,7 @@ io.on('connection', function (socket) {
   socket.on('join', function (data) {
     // Check if key matches (always allow for demo id)
     if (data.key === md5(config.salt + data.mapId) || data.mapId === 'demo') {
-      Object.keys(socket.rooms).map((room) => {
-        console.log('Leaving room ' + room);
-        socket.leave(room);
-      });
-      console.log('Joining room ' + data.mapId);
-      socket.join(data.mapId);
+      join(socket, data.mapId);
     } else {
       let error = 'Could not join room, key is invalid';
       console.log(error);
@@ -60,15 +55,23 @@ io.on('connection', function (socket) {
   socket.on('new', function (data) {
     let mapId = random(8);
     let key = md5(config.salt + mapId);
-    console.log(mapId, key);
 
     // Join new room immediately
-    socket.join(mapId);
+    join(socket, mapId);
 
     // Return new key and mapId to client
     socket.emit('map_created', {mapId, key});
   });
 });
+
+const join = (socket, mapId) => {
+  Object.keys(socket.rooms).map((room) => {
+    console.log('Leaving room ' + room);
+    socket.leave(room);
+  });
+  console.log('Joining room ' + mapId);
+  socket.join(mapId);
+};
 
 const emitEvent = (ip, mapId) => {
   //console.time("lookup");
