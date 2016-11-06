@@ -21,6 +21,13 @@ export default (state = {}, action) => {
                 mapId: action.mapId,
                 showInfo: true // Always show info screen so user can see new code and links
             };
+        case 'UPDATE_MAP_DATA':
+            return {
+                ...state,
+                zoom: action.zoom,
+                lat: action.lat,
+                lng: action.lng
+            };
         default:
             return state
     }

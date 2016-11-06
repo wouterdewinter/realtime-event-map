@@ -17,6 +17,9 @@ const mapDispatchToProps = (dispatch) => {
         updateMapId: (mapId) => {
             dispatch({type: 'UPDATE_MAP_ID', mapId});
             dispatch(joinMapIdThunk);
+        },
+        onMapChange: (data) => {
+            dispatch({type: 'UPDATE_MAP_DATA', ...data})
         }
     }
 };

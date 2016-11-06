@@ -1,6 +1,5 @@
 import React from 'react';
 import h from 'react-hyperscript';
-import hash from 'modules/hash';
 import theme from 'modules/map/theme-dark';
 
 export default class extends React.Component {
@@ -22,8 +21,8 @@ export default class extends React.Component {
 
     initMap () {
         this.map = new google.maps.Map(this.mapNode, {
-            zoom: Number(hash.getParam('zoom', 2)),
-            center: {lat: Number(hash.getParam('lat', 0)), lng: Number(hash.getParam('lng', 0))},
+            zoom: this.props.zoom,
+            center: {lat: this.props.lat, lng: this.props.lng},
             mapTypeControlOptions: {
                 mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain', 'dark']
             },
@@ -36,7 +35,6 @@ export default class extends React.Component {
 
         var myoverlay = new google.maps.OverlayView();
         myoverlay.draw = function () {
-            console.log('draw');
             this.getPanes().markerLayer.id='markerLayer';
         };
         myoverlay.setMap(this.map);
@@ -44,16 +42,15 @@ export default class extends React.Component {
         this.map.addListener('center_changed', () => this.updateMap());
         this.map.addListener('zoom_changed', () => this.updateMap());
 
-        this.props.mapCallback(this.map);
+        this.props.onMapReady(this.map);
     }
 
     updateMap () {
-
         let data = {
             zoom: this.map.getZoom(),
             lat: this.map.getCenter().lat(),
             lng: this.map.getCenter().lng()
         };
-        hash.updateParams(data);
+        this.props.onMapChange(data);
     }
 }

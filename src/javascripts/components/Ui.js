@@ -22,7 +22,13 @@ class Ui extends React.Component {
 
         return (
             h('div', [
-                h(Map, {mapCallback: this.props.mapCallback}),
+                h(Map, {
+                    onMapReady: this.props.onMapReady,
+                    onMapChange: this.props.onMapChange,
+                    lng: this.props.lng,
+                    lat: this.props.lat,
+                    zoom: this.props.zoom
+                }),
                 h(Menu, {onClick: this.props.toggleMenu}),
                 infoPanel
             ])

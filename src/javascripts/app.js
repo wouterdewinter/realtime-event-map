@@ -28,10 +28,12 @@ store.subscribe((state) => {
 
 // Initialise redux state from hash
 const initStateFromHash = () => {
-    console.log("hash change");
     let state = {
         mapId: hash.getParam('mapId', 'demo'),
-        showInfo: hash.getParam('showInfo', 'true') === 'true'
+        showInfo: hash.getParam('showInfo', 'true') === 'true',
+        zoom: Number(hash.getParam('zoom', 2)),
+        lat: Number(hash.getParam('lat', 0)),
+        lng: Number(hash.getParam('lng', 0))
     };
     store.dispatch({type: 'INIT_STATE', state});
 };
@@ -45,17 +47,15 @@ window.onhashchange = initStateFromHash;
 store.dispatch(joinMapIdThunk);
 
 // Callback for when google map is available
-const mapCallback = (map) => {
+const onMapReady = (map) => {
     // Add a marker on the hit event
     socket.on('hit', function (data) {
         addMarker(map, data);
     });
-
-    console.log(map);
 };
 
 // Render the UI
 ReactDOM.render(
-    h(Provider, {store}, [h(App, {mapCallback})]),
+    h(Provider, {store}, [h(App, {onMapReady})]),
     document.getElementById('ui')
 );
