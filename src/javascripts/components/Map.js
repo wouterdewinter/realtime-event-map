@@ -7,6 +7,14 @@ export default class extends React.Component {
         this.initMap();
     }
 
+    componentDidUpdate() {
+        if (this.props.mapUpdateNeeded) {
+            this.map.setZoom(this.props.zoom);
+            this.map.setCenter({lat: this.props.lat, lng: this.props.lng});
+            this.props.onUpdateMapComplete();
+        }
+    }
+
     render() {
         let style = {
             height: "100%",

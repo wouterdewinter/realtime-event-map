@@ -1,9 +1,15 @@
-export default (state = {}, action) => {
+export default (state = {mapUpdateNeeded: false}, action) => {
     switch (action.type) {
         case 'INIT_STATE':
             return {
                 ...state,
                 ...action.state
+            };
+        case 'UPDATE_STATE':
+            return {
+                ...state,
+                ...action.state,
+                mapUpdateNeeded: true // Map update needed if map state is not initiated by map itself
             };
         case 'INFO_CLOSE':
             return {
@@ -28,6 +34,12 @@ export default (state = {}, action) => {
                 lat: action.lat,
                 lng: action.lng
             };
+        case 'UPDATE_MAP_COMPLETE':
+            return {
+                ...state,
+                mapUpdateNeeded: false
+            };
+
         default:
             return state
     }

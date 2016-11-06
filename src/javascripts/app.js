@@ -22,26 +22,29 @@ let store = createStore(
 );
 
 // Push state changes to url hash
-store.subscribe((state) => {
-    hash.updateParams(store.getState());
+store.subscribe(() => {
+    let {lng, lat, zoom, showInfo, mapId} = store.getState();
+    hash.updateParams({lng, lat, zoom, showInfo, mapId});
 });
 
-// Initialise redux state from hash
-const initStateFromHash = () => {
-    let state = {
+// Translate hash params to state
+const mapHashToState = () => {
+    return {
         mapId: hash.getParam('mapId', 'demo'),
         showInfo: hash.getParam('showInfo', 'true') === 'true',
         zoom: Number(hash.getParam('zoom', 2)),
         lat: Number(hash.getParam('lat', 0)),
         lng: Number(hash.getParam('lng', 0))
     };
-    store.dispatch({type: 'INIT_STATE', state});
 };
 
-initStateFromHash();
+// Initialise redux state from hash
+store.dispatch({type: 'INIT_STATE', state: mapHashToState()});
 
 // Update state also on hash changes
-window.onhashchange = initStateFromHash;
+window.onhashchange = () => {
+    store.dispatch({type: 'UPDATE_STATE', state: mapHashToState()});
+};
 
 // Join current map id
 store.dispatch(joinMapIdThunk);

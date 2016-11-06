@@ -20,6 +20,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onMapChange: (data) => {
             dispatch({type: 'UPDATE_MAP_DATA', ...data})
+        },
+        onUpdateMapComplete: () => {
+            dispatch({type: 'UPDATE_MAP_COMPLETE'})
         }
     }
 };

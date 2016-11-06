@@ -25,6 +25,8 @@ class Ui extends React.Component {
                 h(Map, {
                     onMapReady: this.props.onMapReady,
                     onMapChange: this.props.onMapChange,
+                    mapUpdateNeeded: this.props.mapUpdateNeeded,
+                    onUpdateMapComplete: this.props.onUpdateMapComplete,
                     lng: this.props.lng,
                     lat: this.props.lat,
                     zoom: this.props.zoom
