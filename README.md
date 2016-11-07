@@ -1,17 +1,21 @@
 # World Traffic Map
-Shows a map of the world with realtime web traffic data. Created with a minimalistic design for usage on dashboards.
+This application shows pageviews of your website on the map with virtually no delay (just a few ms). It does so by translating the visitor IP to a geographical coordinates. It's created with a minimalistic design for usage on dashboards.
 
 ## Demo
-This is actually all you need, you can create a free map and use it on your website. View the on:
+This is actually all you need, you can create a free map here and use it on your website. View it on:
+
 https://rtm-92767.onmodulus.net/
 
 ## Technologies
 The project uses the following technologies:
 
-* websockets (trough socket.io)
-* nodejs (as webserver)
-* react
-* redux
+* Websockets (trough socket.io)
+* NodeJs (as webserver)
+* Maxmind GeoLite city
+* React
+* Redux
+* Gulp
+* Google Maps
 
 ## Prerequisites
 To get started you need the following:
@@ -20,11 +24,14 @@ To get started you need the following:
 * Nodejs installed
 
 ## Install
-* Clone the repository with:
-      git clone https://github.com/wouterdewinter/world-traffic-map wtm
+Clone the repository with:
 
-* Install packages
-      npm install
+    git clone https://github.com/wouterdewinter/world-traffic-map wtm
+
+Install the NPM packages
+
+    npm install
       
-* Run in development mode
-      npm run development
+Run the application in development mode. This will build the application using Gulp and uses browsersync to send code updates to the browser. NodeJs is also automatically restarted when code has changed.
+
+    npm run development
