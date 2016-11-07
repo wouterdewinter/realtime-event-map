@@ -5,7 +5,7 @@ var io = require('socket.io').listen(server);
 var fs = require('fs');
 var maxmind = require('maxmind');
 var config = require('./config/config.js');
-var cityLookup = maxmind.openSync(__dirname + '/data/GeoLite2-City.mmdb');
+var cityLookup = maxmind.openSync(__dirname + '/data/GeoLite2-City.mmdb', {cache: {max: 100, maxAge: 60 * 1000}});
 var md5 = require('md5');
 var random = require('./src/javascripts/modules/random.js');
 app.use(express.static('public'));
@@ -27,11 +27,22 @@ app.get('/test', function (req, res) {
 
 app.get('/hit', function (req, res) {
   let ip = req.ip;
-  console.log('Http ip is '+ip);
   emitEvent(ip, req.query.id);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.end('Ok');
+});
+
+app.get('/img', function (req, res) {
+  let ip = req.ip;
+  emitEvent(ip, req.query.id);
+  var buf = new Buffer(43);
+  buf.write("R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==", "base64");
+  res.set('Content-Type', 'image/gif');
+  res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  res.send(buf);
 });
 
 io.on('connection', function (socket) {
@@ -85,7 +96,7 @@ const emitEvent = (ip, mapId) => {
     io.to(mapId).emit('hit', data);
     //console.log('emitting event ', {data, ip});
   } else {
-    console.log("lookup failed for " + ip)
+    //console.log("lookup failed for " + ip)
   }
 };
 
@@ -100,3 +111,9 @@ const randomIp = () => {
 setInterval(() => {
   emitEvent(randomIp(), 'demo')
 }, 1000);
+
+//setInterval(() => {
+//  console.log("Mem used: "+process.memoryUsage().heapUsed)
+//}, 1000);
+
+

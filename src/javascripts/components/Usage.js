@@ -6,11 +6,12 @@ import CodeBlock from './CodeBlock';
 
 export default class extends React.Component {
     render() {
-        let url = location.protocol + '//' + location.host + '/hit?id=' + this.props.mapId;
-        let img = '<img src="'+url+'" alt="rtm" />';
+        let imgUrl = location.protocol + '//' + location.host + '/img?id=' + this.props.mapId;
+        let hitUrl = location.protocol + '//' + location.host + '/hit?id=' + this.props.mapId;
+        let img = '<img src="'+imgUrl+'" alt="rtm" />';
         let js = `function rtm_hit() {
    var xhttp = new XMLHttpRequest();
-   xhttp.open("GET", "${url}", true);
+   xhttp.open("GET", "${hitUrl}", true);
    xhttp.send();
 }
 rtm_hit();`;
