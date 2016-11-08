@@ -58,6 +58,18 @@ const onMapReady = (map) => {
     });
 };
 
+// Re-join map after reconnection
+socket.on('reconnect', () => {
+    console.log('reconnected');
+    store.dispatch(joinMapIdThunk);
+});
+
+// On reconnections
+socket.on('reconnecting', () => {
+    console.log('reconnecting');
+});
+
+
 // Called when new mapId is available
 socket.on('map_created', function (data) {
     store.dispatch({type: 'NEW_MAP', mapId: data.mapId, key: data.key});
