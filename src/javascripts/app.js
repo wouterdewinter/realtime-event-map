@@ -10,6 +10,7 @@ import { addMarker } from './modules/map/map'
 import reducer from './reducers/index'
 import App from './components/App';
 import joinMapIdThunk from './thunks/joinMapIdThunk';
+import autoCenterThunk from './thunks/autoCenterThunk';
 
 // Create socket (defaults to current hostname and port)
 var socket = io();
@@ -54,7 +55,8 @@ store.dispatch(joinMapIdThunk);
 const onMapReady = (map) => {
     // Add a marker on the hit event
     socket.on('hit', function (data) {
-        addMarker(map, data);
+        addMarker(map, data.lat, data.lng, data.tla, data.color);
+        //store.dispatch(autoCenterThunk(data.lat, data.lng))
     });
 };
 

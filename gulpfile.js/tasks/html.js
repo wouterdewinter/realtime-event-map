@@ -1,3 +1,7 @@
+// Read application config for string replacement in HTML
+var appConfig    = require('../../config/config.js');
+
+var config       = require('../config')
 var config       = require('../config')
 if(!config.tasks.html) return
 
@@ -18,15 +22,10 @@ var paths = {
   dest: path.join(config.root.dest, config.tasks.html.dest),
 }
 
-var getData = function(file) {
-  var dataPath = path.resolve(config.root.src, config.tasks.html.src, config.tasks.html.dataFile)
-  return JSON.parse(fs.readFileSync(dataPath, 'utf8'))
-}
-
 var htmlTask = function() {
 
   return gulp.src(paths.src)
-    .pipe(data(getData))
+    .pipe(data(appConfig))
     .on('error', handleErrors)
     .pipe(render({
       path: [path.join(config.root.src, config.tasks.html.src)],

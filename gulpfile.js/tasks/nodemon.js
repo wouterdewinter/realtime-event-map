@@ -3,7 +3,7 @@ var gulp = require('gulp');
 
 gulp.task('nodemon', function () {
     nodemon({
-        script: 'server.js'
+        script: 'src/nodejs/server.js'
         , ext: 'js html'
         , env: { 'NODE_ENV': 'development' }
     })

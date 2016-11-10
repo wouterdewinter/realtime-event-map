@@ -1,6 +1,6 @@
 <svg width="80" height="80" xmlns="http://www.w3.org/2000/svg">
  <g>
-  <title>Layer 1</title>
   <ellipse ry="35" rx="35" id="svg_1" cy="40" cx="40" stroke-width="1" stroke="#fff " fill="#c00"/>
+  <text text-anchor="middle" alignment-baseline="central" fill="#fff" x="40" y="40" font-size="20" font-weight="bold" font-family="Verdana">Big</text>
  </g>
 </svg>

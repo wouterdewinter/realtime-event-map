@@ -1,13 +1,13 @@
 {
-  "name": "rtm",
+  "name": "REM",
   "version": "0.0.1",
-  "main": "server.js",
-  "description": "Realtime Traffic Map",
+  "main": "src/nodejs/server.js",
+  "description": "Realtime Event Map",
   "engines": {
     "node": "6.9.x"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "node src/nodejs/server.js",
     "gulp": "gulp",
     "development": "gulp",
     "production": "gulp production",
