@@ -4,6 +4,7 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
+var url = require('url');
 
 var maxmind = require('maxmind');
 var cityLookup = maxmind.openSync(__dirname + '/../../data/GeoLite2-City.mmdb', {cache: {max: 100, maxAge: 60 * 1000}});
@@ -22,15 +23,14 @@ server.listen(process.env.PORT || 8080);
 
 // Test with random ip address
 app.get('/test', function (req, res) {
-    emitEvent(randomIp(), req.query.id, req.query.tla, req.query.color);
+    emitEvent(randomIp(), req.query.id, getTla(req), req.query.color);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.end('Ok');
 });
 
 app.get('/hit', function (req, res) {
-    let ip = req.ip;
-    emitEvent(ip, req.query.id, req.query.tla, req.query.color);
+    emitEvent(ip, req.query.id, getTla(req), req.query.color);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.end('Ok');
@@ -38,7 +38,7 @@ app.get('/hit', function (req, res) {
 
 app.get('/img', function (req, res) {
     let ip = req.ip;
-    emitEvent(ip, req.query.id, req.query.tla, req.query.color);
+    emitEvent(ip, req.query.id, getTla(req), req.query.color);
     var buf = new Buffer(43);
     buf.write("R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==", "base64");
     res.set('Content-Type', 'image/gif');
@@ -88,7 +88,7 @@ const join = (socket, mapId) => {
 };
 
 const emitEvent = (ip, mapId, tla = null, color = null) => {
-    console.log(color);
+    // Defaults
     tla = tla || '';
     color = color || 'f00';
 
@@ -106,6 +106,16 @@ const emitEvent = (ip, mapId, tla = null, color = null) => {
     }
 };
 
+const getTla = (req) => {
+    let tla = req.query.tla || '';
+    let referer = req.headers.referer;
+    if (!tla && referer) {
+        let parsed = url.parse(referer);
+        tla = parsed.hostname || tla;
+    }
+    return tla.substr(0, 2).toUpperCase();
+};
+
 const randomIp = () => {
     return Math.floor((Math.random() * 255) + 1)
         + "." + Math.floor((Math.random() * 255) + 1)
@@ -117,9 +127,3 @@ const randomIp = () => {
 setInterval(() => {
     emitEvent(randomIp(), 'demo', 'DM', '0a0');
 }, 1000);
-
-//setInterval(() => {
-//  console.log("Mem used: "+process.memoryUsage().heapUsed)
-//}, 1000);
-
-
