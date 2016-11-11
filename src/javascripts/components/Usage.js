@@ -8,19 +8,19 @@ export default class extends React.Component {
     render() {
         let imgUrl = location.protocol + '//' + location.host + '/img?id=' + this.props.mapId;
         let hitUrl = location.protocol + '//' + location.host + '/hit?id=' + this.props.mapId;
-        let img = `<img src="$(imgUrl)" alt="rtm" width="1" height="1" />`;
-        let js = `function rtm_hit() {
+        let img = `<img src="${imgUrl}" alt="rtm" width="1" height="1" />`;
+        let js = `function rem_hit() {
    var xhttp = new XMLHttpRequest();
    xhttp.open("GET", "${hitUrl}", true);
    xhttp.send();
 }
-rtm_hit();`;
+rem_hit();`;
 
         console.log(js);
         return (
             h(
                 'div', {
-                    className: 'rtm-panel'
+                    className: 'rem-panel'
                 },
                 [
                     h(Close, {onClick: this.props.onClose}),

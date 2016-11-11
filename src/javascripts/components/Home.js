@@ -8,14 +8,14 @@ export default class extends React.Component {
         return (
             h(
                 'div', {
-                    className: 'rtm-panel'
+                    className: 'rem-panel'
                 },
                 [
                     h(Close, {onClick: this.props.onClose}),
                     h('h1', text.title),
                     h('p', text.intro),
                     h('button', {
-                        className: 'rtm-button',
+                        className: 'rem-button',
                         onClick: this.props.onCreateMap
                     }, text.createBtn)
                 ]

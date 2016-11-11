@@ -8,7 +8,7 @@ export default class extends React.Component {
             h('div',[
                 h('strong', this.props.title),
                 h('pre', {
-                    className: 'rtm-code'
+                    className: 'rem-code'
                 }, this.props.children)
             ])
         )

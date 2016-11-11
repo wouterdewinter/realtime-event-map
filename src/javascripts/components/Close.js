@@ -6,7 +6,7 @@ export default class extends React.Component {
     render() {
         return (
             h('i', {
-                className: 'rtm-close fa fa-times',
+                className: 'rem-close fa fa-times',
                 onClick: this.props.onClick
             })
         )

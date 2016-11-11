@@ -1,5 +1,0 @@
-- manage hosting
-- debug mode or better logging
-- introduce rooms (and save in url hash)
-- save map location in url
-- basic interface to create roomsgoog

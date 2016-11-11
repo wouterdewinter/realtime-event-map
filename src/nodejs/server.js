@@ -22,7 +22,7 @@ server.listen(process.env.PORT || 8080);
 
 // Test with random ip address
 app.get('/test', function (req, res) {
-    emitEvent(randomIp(), req.query.id);
+    emitEvent(randomIp(), req.query.id, req.query.tla, req.query.color);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.end('Ok');
@@ -87,14 +87,18 @@ const join = (socket, mapId) => {
     socket.join(mapId);
 };
 
-const emitEvent = (ip, mapId, tla = 'Dem', color = '#0a0') => {
+const emitEvent = (ip, mapId, tla = null, color = null) => {
+    console.log(color);
+    tla = tla || '';
+    color = color || 'f00';
+
     var city = cityLookup.get(ip);
     if (city !== null && city.location !== undefined) {
         data = {
             lng: city.location.longitude,
             lat: city.location.latitude,
             tla,
-            color
+            color: '#'+color
         };
         io.to(mapId).emit('hit', data);
     } else {
@@ -111,7 +115,7 @@ const randomIp = () => {
 
 // Simulate events
 setInterval(() => {
-    emitEvent(randomIp(), 'demo');
+    emitEvent(randomIp(), 'demo', 'DM', '0a0');
 }, 1000);
 
 //setInterval(() => {

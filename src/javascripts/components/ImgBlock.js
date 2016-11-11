@@ -6,7 +6,7 @@ export default class extends React.Component {
     render() {
         return (
             h('pre', {
-                className: 'rtm-code'
+                className: 'rem-code'
             }, this.props.children)
         )
     }

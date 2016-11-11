@@ -36,7 +36,7 @@
       "autoprefixer": {
         "browsers": ["last 3 versions"]
       },
-      "sass": {
+      "scss": {
         "indentedSyntax": true,
         "includePaths": [
           "./node_modules/normalize.css"
@@ -67,20 +67,6 @@
       "dest": "fonts",
       "extensions": ["woff2", "woff", "eot", "ttf", "svg"]
     },
-
-    "iconFont": {
-      "src": "icons",
-      "dest": "fonts",
-      "sassDest": "generated",
-      "extensions": ["woff2", "woff", "eot", "ttf", "svg"]
-    },
-
-    "svgSprite": {
-      "src": "icons",
-      "dest": "images",
-      "extensions": ["svg"]
-    },
-
     "production" : {
       "rev": true
     }
