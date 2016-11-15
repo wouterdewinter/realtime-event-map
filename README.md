@@ -10,6 +10,17 @@ Because the application is so efficient it doesn't need a lot of server resource
 This is actually all you need, you can create your own map here and connect it on your website without any costs. View the demo on:
 
 https://rtm-92767.onmodulus.net/
+    
+## Technologies
+The project uses the following technologies:
+
+* Websockets (trough socket.io)
+* NodeJs (as webserver)
+* Maxmind GeoLite city
+* React
+* Redux
+* Gulp
+* Google Maps
 
 ## Sending in events
 There are a few ways to send in events:
@@ -32,7 +43,7 @@ function rem_hit() {
 }
 rem_hit();
 ```
-    
+
 With all methods you will need to replace [map_id] with your own map id and if you host the application yourself the url of the application. (Use http://localhost:3000/ for development). There are also a few extra get options that you can append to the url.
 
 parameter | description | default | example
@@ -43,17 +54,6 @@ tla | The two (or three) letter acronym to show inside the circle. The tla will 
 An example with all parameters set:
     
     https://rtm-92767.onmodulus.net/img?id=[map_id]&color=ffaa00&tla=xx
-    
-## Technologies
-The project uses the following technologies:
-
-* Websockets (trough socket.io)
-* NodeJs (as webserver)
-* Maxmind GeoLite city
-* React
-* Redux
-* Gulp
-* Google Maps
 
 ## Prerequisites
 To get started you need the following:
