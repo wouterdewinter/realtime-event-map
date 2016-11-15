@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var random = require('./random.js');
 var url = require('url');
@@ -13,13 +15,15 @@ module.exports = (app, io, cityLookup) => {
         res.end('Ok');
     });
 
-    app.get('/hit', function (req, res) {
+    // Receive event and return text response
+    app.get('/event', function (req, res) {
         emitEvent(ip, req.query.id, getTla(req), req.query.color);
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.writeHead(200, {'Content-Type': 'text/plain'});
         res.end('Ok');
     });
 
+    // Receive event and return 1 by 1 pixel image response
     app.get('/img', function (req, res) {
         let ip = req.ip;
         emitEvent(ip, req.query.id, getTla(req), req.query.color);
@@ -32,6 +36,7 @@ module.exports = (app, io, cityLookup) => {
         res.send(buf);
     });
 
+    // Emit event to all connected clients for this mapId
     function emitEvent (ip, mapId, tla = null, color = null) {
         // Defaults
         tla = tla || '';
@@ -39,7 +44,7 @@ module.exports = (app, io, cityLookup) => {
 
         var city = cityLookup.get(ip);
         if (city !== null && city.location !== undefined) {
-            data = {
+            let data = {
                 lng: city.location.longitude,
                 lat: city.location.latitude,
                 tla,
@@ -58,6 +63,7 @@ module.exports = (app, io, cityLookup) => {
     }, 1000);
 };
 
+// Create a tla string based on a request
 function getTla (req) {
     let tla = req.query.tla || '';
 

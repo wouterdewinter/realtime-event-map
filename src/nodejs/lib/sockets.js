@@ -1,3 +1,5 @@
+'use strict';
+
 var md5 = require('md5');
 var ioServer = require('socket.io');
 var config = require('../../../config/config.js');

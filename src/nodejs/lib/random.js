@@ -1,3 +1,5 @@
+'use strict';
+
 var crypto = require('crypto');
 
 // Returns random string of a given length only consisting of chars
