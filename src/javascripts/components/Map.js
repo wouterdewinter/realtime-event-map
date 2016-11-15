@@ -31,10 +31,9 @@ export default class extends React.Component {
         this.map = new google.maps.Map(this.mapNode, {
             zoom: this.props.zoom,
             center: {lat: this.props.lat, lng: this.props.lng},
-            mapTypeControlOptions: {
-                mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain', 'dark']
-            },
-            streetViewControl: false
+            mapTypeControl: false,
+            streetViewControl: false,
+            zoomControl: false
         });
 
         //Associate the styled map with the MapTypeId and set it to display.

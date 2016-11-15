@@ -10,7 +10,7 @@ import { addMarker } from './modules/map/map'
 import reducer from './reducers/index'
 import App from './components/App';
 import joinMapIdThunk from './thunks/joinMapIdThunk';
-import autoCenterThunk from './thunks/autoCenterThunk';
+import * as autoCenter from './modules/map/autoCenter';
 
 // Create socket (defaults to current hostname and port)
 var socket = io();
@@ -53,10 +53,16 @@ store.dispatch(joinMapIdThunk);
 
 // Callback for when google map is available
 const onMapReady = (map) => {
+
+    // Init the autocenter feature with the map instance
+    autoCenter.init(map);
+
     // Add a marker on the hit event
     socket.on('hit', function (data) {
         addMarker(map, data.lat, data.lng, data.tla, data.color);
-        //store.dispatch(autoCenterThunk(data.lat, data.lng))
+
+        // Add the position to the autocenter feature
+        autoCenter.addPosition(data.lat, data.lng);
     });
 };
 
@@ -70,7 +76,6 @@ socket.on('reconnect', () => {
 socket.on('reconnecting', () => {
     console.log('reconnecting');
 });
-
 
 // Called when new mapId is available
 socket.on('map_created', function (data) {
