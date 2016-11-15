@@ -1,6 +1,7 @@
 var express = require('express');
 var random = require('./random.js');
 var url = require('url');
+var debug = require('debug')('rtm');
 
 module.exports = (app, io, cityLookup) => {
 
@@ -45,8 +46,9 @@ module.exports = (app, io, cityLookup) => {
                 color: '#'+color
             };
             io.to(mapId).emit('hit', data);
+            debug("emitted event for " + ip);
         } else {
-            console.log("lookup failed for " + ip);
+            debug("lookup failed for " + ip);
         }
     }
 

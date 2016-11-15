@@ -2,6 +2,7 @@ var md5 = require('md5');
 var ioServer = require('socket.io');
 var config = require('../../../config/config.js');
 var random = require('./random.js');
+var debug = require('debug')('rtm');
 
 module.exports = function (webserver) {
 
@@ -10,7 +11,8 @@ module.exports = function (webserver) {
 
     io.on('connection', function (socket) {
 
-        //socket.on('hit', function (data) {
+        // wouter: disabled event collection via sockets for now
+        // socket.on('event', function (data) {
         //    var ip = socket.request.connection.remoteAddress;
         //    emitEvent(ip, data.mapId, data.tla, data.color);
         //});
@@ -22,7 +24,7 @@ module.exports = function (webserver) {
                 join(socket, data.mapId);
             } else {
                 let error = 'Could not join room, key is invalid';
-                console.log(error);
+                debug(error);
                 socket.emit({error});
             }
         });
@@ -46,10 +48,10 @@ module.exports = function (webserver) {
 // Join an existing map (and leave all others)
 function join (socket, mapId) {
     Object.keys(socket.rooms).map((room) => {
-        console.log('Leaving room ' + room);
+        debug('Leaving room ' + room);
         socket.leave(room);
     });
-    console.log('Joining room ' + mapId);
+    debug('Joining room ' + mapId);
     socket.join(mapId);
 }
 
