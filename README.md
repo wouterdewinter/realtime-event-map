@@ -9,7 +9,7 @@ The application is set-up for multi-tenancy. By clicking on the "Create map" but
 Because the application is so efficient it doesn't need a lot of server resources. Therefore of this I can offer you a hosted version for free.
 This is actually all you need, you can create your own map here and connect it on your website without any costs. View the demo on:
 
-https://rtm-92767.onmodulus.net/
+https://rem.wouterdewinter.nl/
     
 ## Technologies
 The project uses the following main technologies:
@@ -29,7 +29,7 @@ There are a few ways to send in events:
 The easiest way is to use a tracking pixel, the format is:
 
 ```html
-<img src="https://rtm-92767.onmodulus.net/img?id=[map_id]" alt="rtm" width="1" height="1" />
+<img src="https://rem.wouterdewinter.nl/img?id=[map_id]" alt="rem" width="1" height="1" />
 ```
 
 ### Javascript
@@ -38,7 +38,7 @@ Alternatively you can use javascript to send in an event directly:
 ```javascript
 function rem_hit() {
    var xhttp = new XMLHttpRequest();
-   xhttp.open("GET", "https://rtm-92767.onmodulus.net/hit?id=[map_id]", true);
+   xhttp.open("GET", "https://rem.wouterdewinter.nl/hit?id=[map_id]", true);
    xhttp.send();
 }
 rem_hit();
@@ -53,7 +53,7 @@ tla | The two (or three) letter acronym to show inside the circle. The tla will 
 
 An example with all parameters set:
     
-    https://rtm-92767.onmodulus.net/img?id=[map_id]&color=ffaa00&tla=xx
+    https://rem.wouterdewinter.nl/img?id=[map_id]&color=ffaa00&tla=xx
 
 ## Features
 
