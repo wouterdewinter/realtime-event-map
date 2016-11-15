@@ -3,6 +3,7 @@ import h from 'react-hyperscript';
 import text from '../text';
 import Close from './Close';
 import CodeBlock from './CodeBlock';
+import ReactMarkdown from 'react-markdown';
 
 export default class extends React.Component {
     render() {
@@ -16,7 +17,6 @@ export default class extends React.Component {
 }
 rem_hit();`;
 
-        console.log(js);
         return (
             h(
                 'div', {
@@ -25,7 +25,7 @@ rem_hit();`;
                 [
                     h(Close, {onClick: this.props.onClose}),
                     h('h1', text.usageTitle),
-                    h('p', text.usageBody),
+                    h(ReactMarkdown, {source: text.usageBody, escapeHtml: true}),
                     h(CodeBlock, {title: "Image"}, img),
                     h('p', text.usageJs),
                     h(CodeBlock, {title: "Javascript XHR request"}, js)

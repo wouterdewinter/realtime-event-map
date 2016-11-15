@@ -1,7 +1,7 @@
 # Realtime Event Map (REM)
 This application shows a visually attactive and minimalistic realtime map of events with virtually no delay (just a few ms). This is ideal to display location based events, such as pageviews, on a dashboard. It helps user to get a quick feeling of the scale of what is happing and where. This is much more difficult to grasp just looking at raw numbers.
 
-The location is obtained by translating the visitor IP to a geographical coordinates. You can customize the color and the two or three letters (TLA) in the event circles.
+The location is obtained by translating the visitor IP to a geographical coordinates. You can customize the color and the two or three letters (TLA) in the event animations.
 
 The application is set-up for multi-tenancy. By clicking on the "Create map" button a unique map ID is created. You can then connect your own application or website to it and view the events using the customized link. The link is secured with a key/hash so the map url cannot be guessed based on the map id.
 
@@ -12,15 +12,15 @@ This is actually all you need, you can create your own map here and connect it o
 https://rtm-92767.onmodulus.net/
     
 ## Technologies
-The project uses the following technologies:
+The project uses the following main technologies:
 
-* Websockets (trough socket.io)
 * NodeJs (as webserver)
-* Maxmind GeoLite city
 * React
 * Redux
+* Websockets (trough socket.io)
 * Gulp
 * Google Maps
+* Maxmind GeoLite city
 
 ## Sending in events
 There are a few ways to send in events:
@@ -54,6 +54,14 @@ tla | The two (or three) letter acronym to show inside the circle. The tla will 
 An example with all parameters set:
     
     https://rtm-92767.onmodulus.net/img?id=[map_id]&color=ffaa00&tla=xx
+
+## Features
+
+### Auto center
+A basic auto-center and auto-scaling of the map is enabled by default. It will scale the map every minute so it will fit the positions of the last 100 events. It will not scale before 100 events have been recorded since the map was opened in the browser.
+
+### URL hashing
+The most important variables (map ID, map location, menu visibility, etc) are saved in the URL after the #. With this you can easily open the configured map on another device such as a dashboard. __Tip__: using a url shortener such as goog.gl will save you some typing if you cannot copy/paste directly. 
 
 ## Prerequisites
 To get started you need the following:
