@@ -17,17 +17,21 @@ There are a few ways to send in events:
 ### Tracking pixel
 The easiest way is to use a tracking pixel, the format is:
 
-    <img src="https://rtm-92767.onmodulus.net/img?id=[map_id]" alt="rtm" width="1" height="1" />
+```html
+<img src="https://rtm-92767.onmodulus.net/img?id=[map_id]" alt="rtm" width="1" height="1" />
+```
 
 ### Javascript
 Alternatively you can use javascript to send in an event directly:
 
-    function rem_hit() {
-       var xhttp = new XMLHttpRequest();
-       xhttp.open("GET", "https://rtm-92767.onmodulus.net/hit?id=[map_id]", true);
-       xhttp.send();
-    }
-    rem_hit();
+```javascript
+function rem_hit() {
+   var xhttp = new XMLHttpRequest();
+   xhttp.open("GET", "https://rtm-92767.onmodulus.net/hit?id=[map_id]", true);
+   xhttp.send();
+}
+rem_hit();
+```
     
 With all methods you will need to replace [map_id] with your own map id and if you host the application yourself the url of the application. (Use http://localhost:3000/ for development). There are also a few extra get options that you can append to the url.
 
@@ -75,3 +79,4 @@ To get started you need the following:
 4. Run the application in development mode. This command will build the application using Gulp, opens the browser and uses browsersync to send code updates to the browser. NodeJs is also automatically restarted when code has changed.
 
         npm run dev
+        
