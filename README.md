@@ -74,13 +74,13 @@ The application will then be available on `http://localhost:8080/`. Note that yo
 
 ## Installation
 
-# Prerequisites
+### Prerequisites
 To get started you need the following:
 
 * Git installed
 * Nodejs / npm installed
     
-# Follow these steps
+### Follow these steps
 1. Clone the repository
 
         git clone https://github.com/wouterdewinter/realtime-event-map rem
