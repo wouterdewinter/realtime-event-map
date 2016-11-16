@@ -69,7 +69,14 @@ To get started you need the following:
 * Git installed
 * Nodejs / npm installed
 
-## Install
+## Docker
+The fastest way to get the application up and running is via docker. It is available on Docker Hub at [wouterdewinter/realtime-event-map](https://hub.docker.com/r/wouterdewinter/realtime-event-map/). To run it type:
+
+    docker run -p 8080:8080 -d wouterdewinter/realtime-event-map
+    
+The application will then be available on `http://localhost:8080/`
+    
+## Installation
 1. Clone the repository
 
         git clone https://github.com/wouterdewinter/realtime-event-map rem
@@ -91,6 +98,3 @@ To get started you need the following:
 6. Run the application in development mode. This command will build the application using Gulp, opens the browser and uses browsersync to send code updates to the browser. NodeJs is also automatically restarted when code has changed.
 
         npm run dev
-
-## Docker
-Alternatively you can run the server in docker using the provided `Dockerfile`
