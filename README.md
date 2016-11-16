@@ -5,6 +5,8 @@ The location is obtained by translating the visitor IP to a geographical coordin
 
 The application is set-up for multi-tenancy. By clicking on the "Create map" button a unique map ID is created. You can then connect your own application or website to it and view the events using the customized link. The link is secured with a key/hash so the map url cannot be guessed based on the map id.
 
+![screenshot](docs/screenshot.png)
+
 ## Website / demo
 Because the application is so efficient it doesn't need a lot of server resources. Therefore of this I can offer you a hosted version for free.
 This is actually all you need, you can create your own map here and connect it on your website without any costs. View the demo on:
