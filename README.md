@@ -82,9 +82,11 @@ To get started you need the following:
 
         npm install
 
-4. Copy the config file in `config/config.default.js` to `config/config.js` and follow the instructions in the file to setup your own google maps id and a security salt
+4. Copy the config file in `config/config.default.js` to `config/config.js` and follow the instructions in the file to setup your own google maps id (optional) and a security salt
 
-5. Download and unzip the maxmind [GeoLite2 City DB](http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz) in the data folder and unzip it
+5. Download and unzip the maxmind [GeoLite2 City DB](http://dev.maxmind.com/geoip/geoip2/geolite2/) in the data folder and unzip it
+
+        curl -O http://geolite.maxmind.com/download/geoip/database/GeoLite2-City.mmdb.gz && gunzip GeoLite2-City.mmdb.gz
 
 6. Run the application in development mode. This command will build the application using Gulp, opens the browser and uses browsersync to send code updates to the browser. NodeJs is also automatically restarted when code has changed.
 
