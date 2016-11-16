@@ -65,20 +65,22 @@ A basic auto-center and auto-scaling of the map is enabled by default. It will s
 ### URL hashing
 The most important variables (map ID, map location, menu visibility, etc) are saved in the URL after the #. With this you can easily open the configured map on another device such as a dashboard. __Tip__: using a url shortener such as goog.gl will save you some typing if you cannot copy/paste directly. 
 
-## Prerequisites
-To get started you need the following:
-
-* Git installed
-* Nodejs / npm installed
-
 ## Docker
 The fastest way to get the application up and running is via docker. It is available on Docker Hub at [wouterdewinter/realtime-event-map](https://hub.docker.com/r/wouterdewinter/realtime-event-map/). To run it type:
 
     docker run -p 8080:8080 -d wouterdewinter/realtime-event-map
     
 The application will then be available on `http://localhost:8080/`. Note that you will have to find a way to set the salt in the `config.js` file to protect the privacy of your users when using the container in production.
-    
+
 ## Installation
+
+# Prerequisites
+To get started you need the following:
+
+* Git installed
+* Nodejs / npm installed
+    
+# Follow these steps
 1. Clone the repository
 
         git clone https://github.com/wouterdewinter/realtime-event-map rem
