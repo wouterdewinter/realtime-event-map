@@ -76,7 +76,7 @@ The fastest way to get the application up and running is via docker. It is avail
 
     docker run -p 8080:8080 -d wouterdewinter/realtime-event-map
     
-The application will then be available on `http://localhost:8080/`
+The application will then be available on `http://localhost:8080/`. Note that you will have to find a way to set the salt in the `config.js` file to protect the privacy of your users when using the container in production.
     
 ## Installation
 1. Clone the repository
