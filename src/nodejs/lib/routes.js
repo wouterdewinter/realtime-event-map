@@ -7,6 +7,14 @@ var debug = require('debug')('rtm');
 
 module.exports = (app, io, cityLookup) => {
 
+    // No index please
+    app.get('/robots.txt', function (req, res) {
+        emitEvent(random.randomIp(), req.query.id, getTla(req), req.query.color);
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.end('User-agent: *\nDisallow: /');
+    });
+
     // Test with random ip address
     app.get('/test', function (req, res) {
         emitEvent(random.randomIp(), req.query.id, getTla(req), req.query.color);
