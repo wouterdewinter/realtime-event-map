@@ -19,7 +19,7 @@ The project uses the following main technologies:
 * NodeJs (as webserver)
 * React
 * Redux
-* Websockets (trough socket.io)
+* Websockets (through socket.io)
 * Gulp
 * Google Maps
 * Maxmind GeoLite city
