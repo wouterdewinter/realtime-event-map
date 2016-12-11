@@ -12,16 +12,6 @@ class Ui extends React.Component {
     render() {
         let infoPanel = null;
 
-        var sampleData = [
-            {id: '5fbmzmtc', x: 7, y: 41, z: 6},
-            {id: 's4f8phwm', x: 11, y: 65, z: 9},
-            {id: 'dsada', x: 22, y: 12, z: 4},
-            {id: 'dads', x: 5, y: 74, z: 9},
-            {id: 'adasda', x: 2, y: 12, z: 9}
-        ];
-
-        var domain = {x: [0, 30], y: [0, 100]};
-
         if (this.props.showInfo && this.props.mapId === 'demo') {
             infoPanel = h(Home, {
                 onClose: this.props.infoClose,
@@ -46,9 +36,9 @@ class Ui extends React.Component {
                     zoom: this.props.zoom
                 }),
                 h(Menu, {onClick: this.props.toggleMenu}),
+                infoPanel,
                 h(Widget, {total: this.props.total}),
-                h(Chart, {data: sampleData, domain: domain}),
-                infoPanel
+                h(Chart, {data: this.props.chartData, domain: {x: [0, 300], y: [0, 50]}})
             ])
         );
     }

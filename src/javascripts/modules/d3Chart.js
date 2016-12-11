@@ -12,6 +12,35 @@ d3Chart.create = function(el, props, state) {
     svg.append('g')
         .attr('class', 'd3-points');
 
+    var gradient = svg.append("defs")
+        .append("linearGradient")
+        .attr("id", "gradient")
+        .attr("x1", "0%")
+        .attr("y1", "50%")
+        .attr("x2", "100%")
+        .attr("y2", "50%")
+        .attr("spreadMethod", "pad");
+
+    gradient.append("stop")
+        .attr("offset", "0%")
+        .attr("stop-color", "#fff")
+        .attr("stop-opacity", 0);
+
+    gradient.append("stop")
+        .attr("offset", "100%")
+        .attr("stop-color", "#fff")
+        .attr("stop-opacity", 1);
+
+    svg.append("svg:path")
+        .attr("stroke", "url(#gradient)")
+        .attr("stroke-width", 2)
+        .attr('class', 'd3-line')
+
+    svg.append("svg:path")
+        .attr("fill", "#fff")
+        .attr('class', 'd3-area')
+        .attr('fill-opacity', '0.1');
+
     this.update(el, state);
 };
 
@@ -26,24 +55,36 @@ d3Chart.destroy = function(el) {
     // in this example there is nothing to do
 };
 
+d3Chart.lineFunc = (scales) => {
+    return d3.area()
+        .x(function (d, i) {
+            return scales.x(i);
+        })
+        .y(function (d) {
+            return scales.y(d);
+        })
+        .curve(d3.curveBasis);
+};
+
+
+d3Chart.areaFunc = (scales) => {
+    return d3.area()
+        .x(function (d, i) {
+            return scales.x(i);
+        })
+        .y1(function (d) {
+            return scales.y(d);
+        })
+        .y0(200)
+        .curve(d3.curveBasis);
+};
+
 d3Chart._drawPoints = function(el, scales, data) {
-    var g = d3.select(el).selectAll('.d3-points');
+    var g = d3.select(el).selectAll('.d3-line');
+    g.attr("d", d3Chart.lineFunc(scales)(data));
 
-    var point = g.selectAll('.d3-point')
-        .data(data, function(d) { return d.id; });
-
-    // ENTER
-    point.enter().append('circle')
-        .attr('class', 'd3-point');
-
-    // ENTER & UPDATE
-    point.attr('cx', function(d) { return scales.x(d.x); })
-        .attr('cy', function(d) { return scales.y(d.y); })
-        .attr('r', function(d) { return scales.z(d.z); });
-
-    // EXIT
-    point.exit()
-        .remove();
+    var g = d3.select(el).selectAll('.d3-area');
+    g.attr("d", d3Chart.areaFunc(scales)(data));
 };
 
 
@@ -63,11 +104,7 @@ d3Chart._scales = function(el, domain) {
         .range([height, 0])
         .domain(domain.y);
 
-    var z = d3.scaleLinear()
-        .range([5, 20])
-        .domain([1, 10]);
-
-    return {x: x, y: y, z: z};
+    return {x: x, y: y};
 };
 
 export default d3Chart;
