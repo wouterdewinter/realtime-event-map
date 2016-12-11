@@ -75,6 +75,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "d3": "^4.4.0",
     "debug": "^2.3.2",
     "express": "^4.13.4",
     "json-loader": "^0.5.4",
