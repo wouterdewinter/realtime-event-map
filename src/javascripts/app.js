@@ -64,6 +64,11 @@ const onMapReady = (map) => {
         // Add the position to the autocenter feature
         autoCenter.addPosition(data.lat, data.lng);
     });
+
+    // Update total
+    socket.on('total', function (data) {
+        store.dispatch({type: 'UPDATE_TOTAL', total: data.total});
+    });
 };
 
 // Re-join map after reconnection

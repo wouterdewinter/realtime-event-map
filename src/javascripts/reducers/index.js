@@ -1,4 +1,4 @@
-export default (state = {mapUpdateNeeded: false}, action) => {
+export default (state = {mapUpdateNeeded: false, total: 0}, action) => {
     switch (action.type) {
         case 'INIT_STATE':
             return {
@@ -10,6 +10,11 @@ export default (state = {mapUpdateNeeded: false}, action) => {
                 ...state,
                 ...action.state,
                 mapUpdateNeeded: true // Map update needed if map state is not initiated by map itself
+            };
+        case 'UPDATE_TOTAL':
+            return {
+                ...state,
+                total: action.total
             };
         case 'INFO_CLOSE':
             return {

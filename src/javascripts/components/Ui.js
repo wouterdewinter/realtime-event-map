@@ -5,6 +5,7 @@ import Menu from './Menu';
 import Map from './Map';
 import Home from './Home';
 import Usage from './Usage';
+import Widget from './Widget';
 
 class Ui extends React.Component {
     render() {
@@ -34,6 +35,7 @@ class Ui extends React.Component {
                     zoom: this.props.zoom
                 }),
                 h(Menu, {onClick: this.props.toggleMenu}),
+                h(Widget, {total: this.props.total}),
                 infoPanel
             ])
         );

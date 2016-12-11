@@ -5,6 +5,9 @@ var random = require('./random.js');
 var url = require('url');
 var debug = require('debug')('rtm');
 
+var buffer = {};
+var total = {};
+
 module.exports = (app, io, cityLookup) => {
 
     // No index please
@@ -58,6 +61,16 @@ module.exports = (app, io, cityLookup) => {
                 tla,
                 color: '#'+color
             };
+
+            if (buffer[mapId] === undefined) {
+                buffer[mapId] = [0];
+                total[mapId] = 0;
+                debug("added buffer for " + mapId);
+            }
+
+            buffer[mapId][0]++;
+            total[mapId]++;
+
             io.to(mapId).emit('hit', data);
             debug("emitted event for " + ip);
         } else {
@@ -68,6 +81,19 @@ module.exports = (app, io, cityLookup) => {
     // Simulate events
     setInterval(() => {
         emitEvent(random.randomIp(), 'demo', 'DM', '0a0');
+    }, 1000);
+
+    // Update totals
+    setInterval(() => {
+        Object.keys(buffer).map((mapId) => {
+            let size = buffer[mapId].unshift(0);
+            while (size > 10) {
+                total[mapId]-=buffer[mapId].pop();
+                size = buffer[mapId].length;
+            }
+            io.to(mapId).emit('total', {total: total[mapId]});
+            debug('total for ' + mapId + ' is ' + total[mapId]);
+        });
     }, 1000);
 };
 
