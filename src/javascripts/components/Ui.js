@@ -37,8 +37,8 @@ class Ui extends React.Component {
                 }),
                 h(Menu, {onClick: this.props.toggleMenu}),
                 infoPanel,
-                h(Widget, {total: this.props.total}),
-                h(Chart, {data: this.props.chartData, domain: {x: [0, 300], y: [0, 50]}})
+                h(Widget, {total: this.props.total})
+                //h(Chart, {data: this.props.chartData, domain: {x: [0, 300], y: [0, 50]}})
             ])
         );
     }

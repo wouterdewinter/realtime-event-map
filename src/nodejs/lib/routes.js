@@ -87,7 +87,7 @@ module.exports = (app, io, cityLookup) => {
     setInterval(() => {
         Object.keys(buffer).map((mapId) => {
             let size = buffer[mapId].unshift(0);
-            while (size > 10) {
+            while (size > 60) {
                 total[mapId]-=buffer[mapId].pop();
                 size = buffer[mapId].length;
             }

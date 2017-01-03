@@ -1,3 +1,6 @@
+// Setup raven for JS error logging
+Raven.config('https://5123fd8718644883a561e9deca34f486@sentry.io/126237').install();
+
 import io from 'socket.io-client';
 import hash from 'modules/hash';
 import React from 'react';
@@ -92,3 +95,8 @@ ReactDOM.render(
     h(Provider, {store}, [h(App, {onMapReady})]),
     document.getElementById('ui')
 );
+
+// Reload application after some time to fix hanging application due to (network) errors
+setTimeout(() => {
+    window.location.reload(false);
+}, 3600 * 1000);
