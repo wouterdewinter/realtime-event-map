@@ -58,14 +58,14 @@ store.dispatch(joinMapIdThunk);
 const onMapReady = (map) => {
 
     // Init the autocenter feature with the map instance
-    autoCenter.init(map);
+    //autoCenter.init(map);
 
     // Add a marker on the hit event
     socket.on('hit', function (data) {
         addMarker(map, data.lat, data.lng, data.tla, data.color);
 
         // Add the position to the autocenter feature
-        autoCenter.addPosition(data.lat, data.lng);
+        //autoCenter.addPosition(data.lat, data.lng);
     });
 
     // Update total
