@@ -68,9 +68,9 @@ The most important variables (map ID, map location, menu visibility, etc) are sa
 ## Docker
 The fastest way to get the application up and running is via docker. It is available on Docker Hub at [wouterdewinter/realtime-event-map](https://hub.docker.com/r/wouterdewinter/realtime-event-map/). To run it type:
 
-    docker run -p 8080:8080 -d wouterdewinter/realtime-event-map
+    docker run -p 8080:8080 -d wouterdewinter/realtime-event-map --google_maps_api_key=[your_key] --salt=[your_salt]
     
-The application will then be available on `http://localhost:8080/`. Note that you will have to find a way to set the salt in the `config.js` file to protect the privacy of your users when using the container in production.
+The application will then be available on `http://localhost:8080/`. Please do not forget to use your own Google Maps API key and change the salt to protect the privacy of your users when using the container in production.
 
 ## Installation
 

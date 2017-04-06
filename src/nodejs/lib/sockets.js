@@ -2,11 +2,10 @@
 
 var md5 = require('md5');
 var ioServer = require('socket.io');
-var config = require('../../../config/config.js');
 var random = require('./random.js');
 var debug = require('debug')('rtm');
 
-module.exports = function (webserver) {
+module.exports = function (webserver, config) {
 
     // Start listening
     var io = ioServer.listen(webserver);

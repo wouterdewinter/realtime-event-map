@@ -1,5 +1,6 @@
 'use strict';
 
+var fs = require('fs');
 var express = require('express');
 var random = require('./random.js');
 var url = require('url');
@@ -8,7 +9,24 @@ var debug = require('debug')('rtm');
 var buffer = {};
 var total = {};
 
-module.exports = (app, io, cityLookup) => {
+module.exports = (app, io, cityLookup, config) => {
+
+    // Serve index
+    app.get('/', function (req, res) {
+        fs.readFile('public/main.html', 'utf8', function (err,data) {
+            if (err) {
+                return res.status(500).send('Internel Server Error');
+            }
+
+            // Replace google maps api key dynamically instead of at build time
+            // This is to allows for a more univesal docker image to be used
+            let body = data.replace('[google_maps_api_key]', config.google_maps_api_key);
+
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.writeHead(200, {'Content-Type': 'text/html'});
+            res.end(body);
+        });
+    });
 
     // No index please
     app.get('/robots.txt', function (req, res) {

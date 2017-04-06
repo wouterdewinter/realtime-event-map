@@ -27,4 +27,4 @@ RUN npm run production
 
 # Start application as default action
 EXPOSE 8080
-CMD [ "npm", "start" ]
+ENTRYPOINT [ "npm", "start", "--" ]
