@@ -11,7 +11,7 @@ The application is set-up for multi-tenancy. By clicking on the "Create map" but
 Because the application is so efficient it doesn't need a lot of server resources. Therefore of this I can offer you a hosted version for free.
 This is actually all you need, you can create your own map here and connect it on your website without any costs. View the demo on:
 
-https://rem.wouterdewinter.nl/
+http://rem.wouterdewinter.nl/
     
 ## Technologies
 The project uses the following main technologies:
