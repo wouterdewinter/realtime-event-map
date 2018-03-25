@@ -12,6 +12,7 @@ Because the application is so efficient it doesn't need a lot of server resource
 This is actually all you need, you can create your own map here and connect it on your website without any costs. View the demo on:
 
 http://rem.wouterdewinter.nl/
+Note: the demo site is offline at the moment
     
 ## Technologies
 The project uses the following main technologies:
